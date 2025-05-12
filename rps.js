@@ -8,14 +8,12 @@ function getComputerChoice(){
         return "scissors"
     }
 }
-console.log(getComputerChoice())
 
 function getHumanChoice(){
     let input = prompt("Please choose your weapon. Rock, paper or scissors?").toLowerCase()
     return input
 }
 
-console.log(getHumanChoice())
 
 let humanScore = 0
 let computerScore = 0
