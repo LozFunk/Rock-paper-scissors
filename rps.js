@@ -15,33 +15,50 @@ function getHumanChoice(){
 }
 
 
-let humanScore = 0
-let computerScore = 0
 
-function playRound(humanChoice, computerChoice){
-    if (
-        (humanChoice == "rock" && computerChoice == "rock") ||
-        (humanChoice == "paper" && computerChoice == "paper") ||
-        (humanChoice == "scissors" && computerChoice == "scissors")
-    ){
-        console.log(`It's a tie, Computer choose ${computerChoice}`)
-        }else if (
-        (humanChoice == "rock" && computerChoice == "scissors")|| 
-        (humanChoice == "paper" && computerChoice == "rock") ||
-        (humanChoice == "scissors" && computerChoice == "paper") 
-    ){
-        humanScore++
-        console.log(`You win!! computer choose ${computerChoice}`)
-        
-}else {
-    computerScore++
-    console.log(`You lose!! Computer choose ${computerChoice}`)
+
+function playGame(){
+    let humanScore = 0
+    let computerScore = 0
+    
+    function playRound(humanChoice, computerChoice){
+        if (
+            (humanChoice == "rock" && computerChoice == "rock") ||
+            (humanChoice == "paper" && computerChoice == "paper") ||
+            (humanChoice == "scissors" && computerChoice == "scissors")
+        ){
+            console.log(`It's a tie, Computer choose ${computerChoice}`)
+            }else if (
+            (humanChoice == "rock" && computerChoice == "scissors")|| 
+            (humanChoice == "paper" && computerChoice == "rock") ||
+            (humanChoice == "scissors" && computerChoice == "paper") 
+        ){
+            humanScore++
+            console.log(`You win!! computer choose ${computerChoice}`)
+            
+    }else {
+        computerScore++
+        console.log(`You lose!! Computer choose ${computerChoice}`)
+    }
+    }
+    
+    
+
+
+    for (i=1;i<=5;i++){
+    const humanSelection = getHumanChoice()
+    const computerSelection = getComputerChoice()
+    playRound(humanSelection, computerSelection)
+    console.log(`Your score: ${humanScore} | Computer score: ${computerScore} `)
+    }
+
+    if (humanScore > computerScore){
+        console.log("You won!!!")
+    }else if(humanScore <computerScore){
+        console.log("You lose!!")
+    } else{
+        console.log("It's a tie")
+    }
 }
-}
 
-const humanSelection = getHumanChoice()
-const computerSelection = getComputerChoice()
-
-playRound(humanSelection, computerSelection)
-console.log(`Your score: ${humanScore} | Computer score: ${computerScore} `)
-
+playGame()
