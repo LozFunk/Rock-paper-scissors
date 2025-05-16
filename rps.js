@@ -9,56 +9,48 @@ function getComputerChoice(){
     }
 }
 
-function getHumanChoice(){
-    let input = prompt("Please choose your weapon. Rock, paper or scissors?").toLowerCase()
-    return input
-}
+const playerSelection = document.querySelectorAll("button");
+const results = document.querySelector("#results");
+const pScore = document.querySelector("#pScore");
+const cScore = document.querySelector("#cScore");
 
+let humanScore = 0;
+let computerScore = 0;
 
+playerSelection.forEach(button => {
+    button.addEventListener("click", () => {
+        const humanChoice = button.textContent.toLowerCase();
+        const computerChoice = getComputerChoice();
+        playGame(humanChoice, computerChoice);
+    });
+});
 
-
-function playGame(){
-    let humanScore = 0
-    let computerScore = 0
-    
-    function playRound(humanChoice, computerChoice){
-        if (
-            (humanChoice == "rock" && computerChoice == "rock") ||
-            (humanChoice == "paper" && computerChoice == "paper") ||
-            (humanChoice == "scissors" && computerChoice == "scissors")
-        ){
-            console.log(`It's a tie, Computer choose ${computerChoice}`)
-            }else if (
-            (humanChoice == "rock" && computerChoice == "scissors")|| 
-            (humanChoice == "paper" && computerChoice == "rock") ||
-            (humanChoice == "scissors" && computerChoice == "paper") 
-        ){
-            humanScore++
-            console.log(`You win!! computer choose ${computerChoice}`)
-            
-    }else {
-        computerScore++
-        console.log(`You lose!! Computer choose ${computerChoice}`)
-    }
-    }
-    
-    
-
-
-    for (i=1;i<=5;i++){
-    const humanSelection = getHumanChoice()
-    const computerSelection = getComputerChoice()
-    playRound(humanSelection, computerSelection)
-    console.log(`Your score: ${humanScore} | Computer score: ${computerScore} `)
+function playGame(humanChoice, computerChoice){
+    if (
+        (humanChoice === computerChoice)
+    ){
+        results.textContent = `It's a tie! Computer chose ${computerChoice}`;
+    } else if (
+        (humanChoice === "rock" && computerChoice === "scissors") || 
+        (humanChoice === "paper" && computerChoice === "rock") ||
+        (humanChoice === "scissors" && computerChoice === "paper")
+    ){
+        humanScore++;
+        results.textContent = `You win! Computer chose ${computerChoice}`;
+    } else {
+        computerScore++;
+        results.textContent = `You lose! Computer chose ${computerChoice}`;
     }
 
-    if (humanScore > computerScore){
-        console.log("You won!!!")
-    }else if(humanScore <computerScore){
-        console.log("You lose!!")
-    } else{
-        console.log("It's a tie")
+    pScore.textContent = humanScore;
+    cScore.textContent = computerScore;
+
+    // Check for game winner
+    if (humanScore >= 5) {
+        results.textContent += " 🎉 You won the game!";
+        resetGame();
+    } else if (computerScore >= 5) {
+        results.textContent += " 💀 You lost the game!";
+        resetGame();
     }
 }
-
-playGame()
